@@ -33,6 +33,13 @@ export default class App extends React.Component {
         header: 'simple text',
         footer: (currentPage, pageCount) =>
           currentPage.toString() + ' of ' + pageCount,
+        watermark: {
+          text: 'watermark',
+          color: 'blue',
+          opacity: 0.1,
+          bold: true,
+          italics: false,
+        },
         content: [
           {
             columns: [
@@ -102,6 +109,30 @@ export default class App extends React.Component {
             foreground: 'red',
             background: 'yellow',
             style: ['line'],
+          },
+          {
+            width: 'auto',
+            image: 'logo',
+            width: 310,
+            height: 310,
+            pageSize: 'A5',
+            pageOrientation: 'landscape',
+            pageBreak: 'before',
+          },
+          {
+            canvas: [
+              {
+                type: 'rect',
+                x: 20,
+                y: 20,
+                w: 270,
+                h: 270,
+                r: 5,
+                dash: { length: 5 },
+                lineColor: 'blue',
+              },
+            ],
+            margin: [0, -310, 0, 0],
           },
         ],
         styles: {
