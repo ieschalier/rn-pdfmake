@@ -7,6 +7,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "code-128-encoder": "^3.0.1",
     "expo": "^32.0.0",
     "faker": "^4.1.0",
     "pdfmake": "^0.1.54",

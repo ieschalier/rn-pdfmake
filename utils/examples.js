@@ -1,4 +1,7 @@
 import faker from 'faker'
+// import Encoder from 'code-128-encoder'
+// var Encoder = require('code-128-encoder/code-128-encoder.min')
+import Encoder from './encoder'
 
 export const columnsContent = () => [
   {
@@ -128,3 +131,15 @@ export const security = () => ({
     documentAssembly: true,
   },
 })
+
+const encoder = new Encoder()
+
+export const barCode = () => [
+  {
+    // text: 'ÌTestWÎ',
+    text: encoder.encode('PJJ123C'),
+    style: ['line'],
+    font: 'BarcodeFont',
+    fontSize: '22',
+  },
+]
