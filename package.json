@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "expo": "^32.0.0",
+    "faker": "^4.1.0",
     "pdfmake": "^0.1.54",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz"

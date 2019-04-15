@@ -9,23 +9,39 @@ export default class App extends React.Component {
     inProgress: false,
     pdfData: undefined,
     onlyData: undefined,
+    bench: undefined,
   }
 
-  generatePdf = async () => {
+  generatePdf = async light => {
     try {
+      const startAt = Date.now()
+
       this.setState({ inProgress: true })
 
-      const { pdfData, onlyData } = await generatePdf
+      const { pdfData, onlyData } = await generatePdf(light)
 
       this.setState({
         pdfData,
         onlyData,
         inProgress: false,
+        bench: Date.now() - startAt,
       })
     } catch (error) {
       console.error(error)
       this.setState({ inProgress: false })
     }
+  }
+
+  ask = () => {
+    Alert.alert(
+      'What do you want to do ?',
+      'Generate a light or a full lines PDF',
+      [
+        { text: 'light', onPress: () => this.generatePdf(true) },
+        { text: 'full', onPress: () => this.generatePdf(false) },
+      ],
+      { cancelable: false },
+    )
   }
 
   print = () => {
@@ -42,15 +58,12 @@ export default class App extends React.Component {
   }
 
   render() {
-    const { pdfData, inProgress } = this.state
+    const { pdfData, inProgress, bench } = this.state
     return (
       <View style={styles.container}>
         <Text>Open up App.js to start working on your app!</Text>
-        <Button
-          title="generate"
-          onPress={this.generatePdf}
-          disabled={inProgress}
-        />
+        <Button title="generate" onPress={this.ask} />
+        {bench && <Text>Last generation time : {bench} ms </Text>}
         {!!pdfData && <Button title="print" onPress={this.print} />}
         {!!pdfData && (
           <Button title="print from file" onPress={this.openFile} />

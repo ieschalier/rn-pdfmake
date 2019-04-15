@@ -1,4 +1,6 @@
-export const columnsContent = [
+import faker from 'faker'
+
+export const columnsContent = () => [
   {
     columns: [
       {
@@ -6,7 +8,7 @@ export const columnsContent = [
         image: 'logo',
         fit: [50, 50],
       },
-      { width: '*', text: 'react-native pdf', style: ['header'] },
+      { width: '*', text: faker.company.companyName(), style: ['header'] },
     ],
     style: ['line'],
   },
@@ -14,11 +16,11 @@ export const columnsContent = [
     columns: [
       {
         width: '50%',
-        text: 'inline left',
+        text: faker.commerce.department(),
       },
       {
         width: '50%',
-        text: 'inline right',
+        text: faker.commerce.department(),
       },
     ],
     style: ['line'],
@@ -26,7 +28,7 @@ export const columnsContent = [
   },
 ]
 
-export const layout = [
+export const layout = light => [
   {
     layout: 'lightHorizontalLines', // optional
     table: {
@@ -34,35 +36,39 @@ export const layout = [
       widths: ['*', 'auto', 100, '*'],
 
       body: [
-        ['First', 'Second', 'Third', 'The last one'],
-        ['Value 1', 'Value 2', 'Value 3', 'Value 4'],
-        [{ text: 'Bold value', bold: true }, 'Val 2', 'Val 3', 'Val 4'],
+        ['department', 'productName', 'color', 'price'],
+        ...[...new Array(light ? 2 : 200)].map(() => [
+          { text: faker.commerce.department(), bold: true },
+          faker.commerce.productName(),
+          faker.commerce.color(),
+          faker.commerce.price(),
+        ]),
       ],
     },
     style: ['line'],
   },
 ]
 
-export const lists = [
+export const lists = light => [
   {
-    text: 'Bulleted list example:',
+    text: 'Emails',
     style: ['line'],
   },
   {
     // to treat a paragraph as a bulleted list, set an array of items under the ul key
-    ul: ['Item 1', 'Item 2', 'Item 3', { text: 'Item 4', bold: true }],
+    ul: [...new Array(light ? 2 : 200)].map(faker.internet.email),
   },
   {
-    text: 'Numbered list example:',
+    text: 'Users :',
     style: ['line'],
   },
   {
     // for numbered lists set the ol key
-    ol: ['Item 1', 'Item 2', 'Item 3'],
+    ol: [...new Array(light ? 2 : 200)].map(faker.name.findName),
   },
 ]
 
-export const link = [
+export const link = () => [
   {
     text: 'google',
     link: 'http://google.com',
@@ -72,7 +78,7 @@ export const link = [
   { text: 'Go to page 2', linkToPage: 2, style: ['line'] },
 ]
 
-export const qr = [
+export const qr = () => [
   { qr: 'text in QR', style: ['line'] },
   {
     qr: 'text in QR',
@@ -82,7 +88,7 @@ export const qr = [
   },
 ]
 
-export const canvas = [
+export const canvas = () => [
   {
     width: 'auto',
     image: 'logo',
@@ -109,7 +115,7 @@ export const canvas = [
   },
 ]
 
-export const security = {
+export const security = () => ({
   userPassword: '123',
   ownerPassword: '123456',
   permissions: {
@@ -121,4 +127,4 @@ export const security = {
     contentAccessibility: true,
     documentAssembly: true,
   },
-}
+})
